@@ -43,4 +43,4 @@ docker exec drupal2 bash -c "drush site-install standard -y --db-url=mysql://dru
 
 ### 6. Test it
 
-Visit `http://drupal1.dev` and `http://drupal1.dev`. You should see working Drupal installations.
+Visit `http://drupal1.dev` and `http://drupal2.dev`. You should see working Drupal installations.
