@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  drupal2:
+    image: geerlingguy/drupal-vm:4.5.0
+    container_name: drupal2
+    ports:
+      - 8282:80
+    dns:
+      - '8.8.8.8'
+      - '8.8.4.4'
+    volumes:
+      - ./:/var/www/drupalvm/:rw,delegated
+    privileged: true
+    command: /lib/systemd/systemd
+    labels:
+      - "traefik.backend=drupal2"
+      - "traefik.frontend.rule=Host:drupal2.dev"
+    networks:
+      - web
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway

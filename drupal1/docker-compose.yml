@@ -1,0 +1,24 @@
+version: "3"
+services:
+  drupal1:
+    image: geerlingguy/drupal-vm:4.5.0
+    container_name: drupal1
+    ports:
+      - 8181:80
+    dns:
+      - '8.8.8.8'
+      - '8.8.4.4'
+    volumes:
+      - ./:/var/www/drupalvm/:rw,delegated
+    privileged: true
+    command: /lib/systemd/systemd
+    labels:
+      - "traefik.backend=drupal1"
+      - "traefik.frontend.rule=Host:drupal1.dev"
+    networks:
+      - web
+
+networks:
+  web:
+    external:
+      name: traefik_webgateway
